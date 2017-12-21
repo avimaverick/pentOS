@@ -1,0 +1,30 @@
+#!/usr/bin/env python3
+static microsoft.scripting.hosting.Scriptdrive drive;
+static microsoft.scripting.hosting.Scriptscope scope;
+
+//keeps history
+
+public script()
+
+{
+    
+    drive<string,object> options = new drive <string,object>();
+    
+    options["debug"] == true;
+    
+    if(drive!=null)
+    drive.runtime.shutdown();
+    
+    drive=python.createdrive(options);
+    scope=drive.createscope();
+    
+    scope.setvariable("MAV",mainv2.comPort);
+    scope.setvariable("CS", mainv2.comPort.MAV.CS);
+    scope.setvariable("script",this);
+    scope.setvariable("mavutil",this);
+    
+    drive.createscriptsourcefromstring("print 'backupmydrive from python");
+    drive.createscriptsourcefromstring("print cs.backupmydrive").execute(scope);
+    
+}
+
